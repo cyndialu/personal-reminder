@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Your Personal Reminder</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css"> 
+  </head>
+  <body>
+      <div class="container-fluid row">
+        <div class="leftSection col-lg-3 p-3">  <!-- Start of Left panel -->
+          <div class="calendar">  <!-- Start of Calendar section -->
+            <div class="divHeader py-4 d-flex justify-content-between">
+              <button class="btnPreMonth btn"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="month-year fw-bold text-center"></div>
+              <button class="btnNextMonth btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="divBody">
+              <div class="weekdays">
+                <div>S</div>
+                <div>M</div>
+                <div>T</div>
+                <div>W</div>
+                <div>T</div>
+                <div>F</div>
+                <div>S</div>
+              </div>
+              <div class="dates">
+                <!-- Load calendar dates here -->
+              </div>
+            </div>
+          </div>  <!-- End of calendar section -->
+          
+          <div class="mt-4 text-center">  <!-- Start of Buttons section on left panel -->
+            <button type="button" id="btnAllTasks" class="btn btn-sm btn-dark mt-2">All Tasks</button>
+            <button type="button" id="btnShowNoDate" class="btn btn-sm btn-dark mt-2">No-Date Tasks</button>
+            <button type="button" id="btnToggleTagDiv" class="btn btn-sm btn-dark mt-2">Sort by Tag</button>   
+          </div>
+          <div class="mt-2 p-2 hide text-center" id="divTag">
+            <button class="btn btn-sm m-1">#Work</button>
+            <button class="btn btn-sm m-1">#Life</button>
+            <button class="btn btn-sm m-1">#Home</button>
+          </div>
+          <div class="mt-3 text-center">
+            <button type="button" id="btnNewTag" class="btn btn-sm btn-dark">Add / Delete a Tag</button>
+          </div>
+          <div class="mt-2 p-2 hide text-center" id="divNewTag">
+            <input type="text" class="form-control" id="inputTag" placeholder="Enter a tag name here" name="inputTag">
+            <button type="button" class="btn btn-sm btn-dark mt-3 mx-2 " id="btnAddTag">Add</button>
+            <button type="button" class="btn btn-sm btn-dark mt-3 mx-2 " id="btnDeleteTag">Delete</button>
+          </div>  
+        </div>  <!-- End of left panel -->
+
+        <div class="middleSection col-lg-6 p-3 bg-dark">  <!-- Start of Middle panel -->
+          <div id="divDateTime" class="container text-white"> <!-- Start of Date and time information -->
+            <div class="row mt-2">
+              <div class="col h2" id="divDay"></div>
+            </div>
+            <div class="row mt-3">
+              <div id="divDate" class="col-sm-6 h6 fst-italic"></div>
+              <div id="divTime" class="col-sm-6 h6 text-end"></div>
+            </div>                   
+          </div>  <!-- End of Date and time information -->
+
+          <div id="divTodoList" class="container my-5 text-white"> 
+            <!-- Load todo items here -->
+          </div>
+          <div class="container">
+            <button type="button" id="btnOpenTodo" class="btn btn-medium btn-outline-secondary text-white">+ Add Todo</button>
+          </div>
+          <div id="divAddTodo" class="container my-5 p-3 text-white hide">  <!-- Start of Add todo task section -->
+            <form>
+              <div class="mb-3">
+                <label for="todoTask" class="form-label">Todo:</label>
+                <input type="text" class="form-control" id="todoTask" placeholder="Enter a task here" name="todoTask">
+              </div>
+              <div class="mb-3">
+                <label for="todoDate" class="form-label">Date:</label>
+                <input type="date" class="form-control" id="todoDate" name="todoDate">
+              </div>
+              <div class="mb-3" id="tagRadio">
+                <div class="mt-4 mb-3">Select a Tag:</div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="todoTag" id="Work" value="Work" checked>
+                  <label class="form-check-label" for="Work">Work</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="todoTag" id="Life" value="Life">
+                  <label class="form-check-label" for="Life">Life</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="todoTag" id="Home" value="Home">
+                  <label class="form-check-label" for="Home">Home</label>
+                </div>
+              </div>
+              <div class="text-end">
+                <button type="button" class="btn btn-outline-secondary text-white" id="btnAddTask">Add</button>
+                <button type="button" class="btn btn-outline-secondary text-white" id="btnClear">Clear</button>
+                <button type="button" class="btn btn-outline-secondary text-white" id="btnCancel">Cancel</button>
+              </div>                 
+            </form>
+          </div>  <!-- End of Add todo task section -->
+        </div>  <!-- End of Middle panel -->
+                
+        <div class="rightSection col-lg-3 p-3"> <!-- Start of Right panel -->
+          <div id= "divWeather" class="container p-3 my-2">
+            <div id="location"></div>
+            <div id="weather"></div>
+            <div id="currentTemp" class="text-center"></div>
+            <p id="feelsLike" class="text-center"></p>
+            <p id="highLow" class="text-center"></p>   
+          </div>
+          <iframe class="mt-5 w-100" src="news.html" height="600" title="News"></iframe>
+        </div>  <!-- End of Right panel -->
+      </div>
+      <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+      <script src="scripts.js"></script>
+      <script src="weather.js" type="module"></script>   
+  </body>
+</html>

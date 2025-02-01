@@ -1,0 +1,92 @@
+.leftSection {
+    background-color: #cc750bcb;
+}
+.calendar {
+    color: #313131;
+}
+.weekdays, .dates {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+}
+.weekdays {
+    background-color: #e99c3fd1;
+}
+.weekdays div {
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+.dates div {
+    cursor:pointer;
+    text-align: center;
+    padding: 5px;
+}
+.current-date, .dates div:hover {
+    background-color: bisque;
+}
+#divTag button {
+    background-color: rgb(68, 67, 67);
+    color:white;
+}
+#divTag button:hover {
+    background-color: #222020;
+}
+.hide {
+    display: none;
+}
+.item {    
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px;      
+}
+.item div {
+    padding: 5px 5px ;
+}
+.date {
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    font-style: italic;
+}
+.tag {
+    color:  rgb(162, 160, 160);
+    font-size: 0.9em;
+    font-weight: bold;
+}
+.btnCheck, .btnTrash {
+    width:40px;
+}
+.done {
+    text-decoration: line-through;
+} 
+.rightSection {
+    background-color: rgb(68, 67, 67);
+}
+#divWeather {
+    background: linear-gradient(#f6cf8b, #f8f9fa);
+    height: auto;
+}
+#state, #feelsLike, #highLow {
+    color: rgb(85, 85, 85); 
+    font-size: 0.9em;
+    padding: 0;
+    margin: 0;
+  }
+#city {
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
+}
+#weather {
+    padding: 0;
+    margin-top: 5px;
+    font-size: 1.2em;
+}
+#currentTemp {
+    font-size: 3em;
+}
+#imgIcon {
+    width: 70px;
+    height: 70px;
+} 
+
