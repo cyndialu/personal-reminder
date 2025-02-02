@@ -1,10 +1,5 @@
-import axios from 'axios';
 const apiKey = process.env.NEWS_API_KEY;
-const url = 'https://api.newsdatahub.com/v1/news?language=en';
-const headers = {
-    'X-Api-Key': apiKey,
-    'User-Agent': 'personal_reminder'
-};
+const url = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=us&language=en`;
 
 // Get news from localStorage
 function getNews(){
@@ -18,17 +13,18 @@ async function loadNews(){
     // Make API call if localStorage is empty or it's been 6 hours since last call
     if(news.length === 0 || ((now - news.time) > (6 * 60 * 60 * 1000))){
         try{
-            const response = await axios.get(url, {headers});
-            const data = response.data;
+            const response = await fetch(url);
+            const data = await response.json();
             //console.log(data);
-            displayNews(data.data);
+            //console.log(data.results);
+            displayNews(data.results);
             const newTime = new Date().getTime();
             const newsObj = {
                 time: newTime,          
-                articles: data.data
+                articles: data.results
             };
             // Add news object to localStorage
-            localStorage.setItem('news', JSON.stringify(newsObj));          
+            localStorage.setItem('news', JSON.stringify(newsObj));    
         }catch (error){
             console.error(`There was an error: `, error.response.data);
         }   
@@ -41,14 +37,12 @@ async function loadNews(){
 function displayNews(data){
     const newsDiv = document.querySelector("#news");
     for(const item of data){
-        if(item.title !== "[Removed]"){
             const articleCard = document.createElement('div');
             articleCard.classList.add('conatainer');
-            articleCard.innerHTML = `<div class="card"><img class="card-img-top" src="${item.media_url}" alt="${item.title}">
+            articleCard.innerHTML = `<div class="card"><img class="card-img-top" src="${item.image_url}" alt="${item.title}">
             <div class="card-body"><h4 class="card-title">${item.title}</h4>
-            <a href="${item.article_link}" target="_blank" class="btn btn-outline-dark mt-3">See more</a></div></div>`;
-            newsDiv.appendChild(articleCard);
-        }        
+            <a href="${item.link}" target="_blank" class="btn btn-outline-dark mt-3">See more</a></div></div>`;
+            newsDiv.appendChild(articleCard);               
     }
 }
             

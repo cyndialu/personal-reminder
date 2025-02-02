@@ -2,35 +2,18 @@
 const apiKey = process.env.OPEN_WEATHER_API_KEY;
 const divWeather = document.getElementById('divWeather');
 
-// Get latitude and longitude of users location and pass for API calls
+// Get latitude and longitude of users location and pass for API call
 function getGeoLocation(){
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
-      getLocation(latitude,longitude);
+      //console.log(latitude,longitude);
       getWeather(latitude,longitude);
     }, showError);  
   } else { 
     console.log('Geolocation is not supported by this browser.');
   }
-}
-
-// Get city name, state, and country from API call and populate data to UI
-async function getLocation(lat,lon){
-  try{
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`);
-    const locationData = await response.json();
-    //console.log(locationData);
-    const locationName = locationData[0].name;
-    const locationState = locationData[0].state;
-    const locationCountry = locationData[0].country;
-    //console.log(locationName, locationState, locationCountry);
-    document.getElementById('location').innerHTML = `<p id="city">${locationName}</p>
-                                                     <p id="state">${locationState}, ${locationCountry}</p>`;   
-  }catch (error){
-    console.error(`There was an error: `, error);
-  } 
 }
 
 // Get data from weather API call
@@ -54,7 +37,11 @@ function displayWeather(data){
   const icon = data.weather[0].icon;
   const iconurl = `https://openweathermap.org/img/w/${icon}.png`;
   const description = data.weather[0].description;
+  const locationName = data.name;
+  const locationCountry = data.sys.country;
   //console.log(currentTemp, feelsLike, hiTemp, loTemp, description, icon);
+  document.getElementById('location').innerHTML = `<p id="city">${locationName}</p>
+                                                   <p id="country">${locationCountry}</p>`;
   document.getElementById('currentTemp').innerHTML = `${currentTemp}&deg;`;
   document.getElementById('feelsLike').innerHTML = `RealFeel: ${feelsLike}&deg;`;
   document.getElementById('highLow').innerHTML = `H: ${hiTemp}&deg;  L: ${loTemp}&deg;`;
