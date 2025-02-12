@@ -6,7 +6,7 @@ const DAYS = ['Sunday', 'Monday','Tuesday','Wednesday','Thursday','Friday','Satu
 
 // << Populate date and time information >>
 document.getElementById('divDay').textContent = DAYS[today.getDay()];
-document.getElementById('divDate').textContent = `${MONTHS[currentMonth+1]} ${today.getDate()}, ${currentYear}`;
+document.getElementById('divDate').textContent = `${MONTHS[currentMonth]} ${today.getDate()}, ${currentYear}`;
 const updateTime =() => {  
   const now = new Date();   
   const currentTime = now.toLocaleTimeString();
